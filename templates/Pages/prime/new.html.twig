@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% block header %}
+  {% include "Pages/partials/_header.html.twig" %}
+{% endblock header %}
+<div class="container mt-4">
+    {% for message in app.flashes('success') %}
+    <div class="alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <h1 class="mt-4">Créer une Prime</h1>
+
+    {{form_start(form)}}
+
+    <div class="form-group">
+        {{form_label(form.Client)}}
+        {{form_widget(form.Client)}}
+        <span style="color: red;">{{form_errors(form)}}</span>
+    </div>
+
+    <div class="form-group">
+    </div>
+
+    {{form_end(form)}}
+
+</div>    
+{% endblock body %}

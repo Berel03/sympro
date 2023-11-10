@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prime{% endblock %}
+
+{% block body %}
+{% block header %}
+  {% include "Pages/partials/_header.html.twig" %}
+{% endblock header %}
+    <div class="container mt-4">
+    
+        <h1>Primes</h1>
+
+        {{form_start(form1)}}
+        <div class="filt" style="display: flex; padding: 10px;">
+            <div class="form" style="display: inline-block; margin: 5px;">
+                {#{form_widget(form1.Date)}#}
+            </div>
+            <div class="form" style="display: inline-block; margin: 5px;">
+            {{form_widget(form1.Contrat)}}
+            </div>
+            <div class="form" style="display: inline-block; margin: 5px;">
+            {{form_widget(form1.Client)}}
+            </div>
+            <div class="form" style="display: inline-block; margin: 5px;">
+            {{form_widget(form1.CompagnieAssurance)}}
+            </div>
+            <div class="form" style="display: inline-block; margin: 5px;">
+            {{form_widget(form1.submit)}}
+            </div>
+        </div>
+        {{form_end(form1)}}
+
+        <a href="{{ path('prime.new') }}" class="btn btn-primary">Créer une prime</a>
+
+    {% if not prime is same as ([]) %}
+
+        <div class="tableau mt-4">
+            <table class="table table-hover" style="text-align: center;">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Date</th>
+                        <th scope="col">Contrat</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Compagnie d'Assurance</th>
+                        <th scope="col">Prime TTC</th>
+                        <th scope="col">Montant Paye</th>
+                        <th scope="col">Reste A Payer</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for primes in prime %}
+                        <tr class="table-primary">
+                            <td>{{ primes.Date|date('d-m-Y') }}</td>
+                            <td>{{ primes.Contrat }}</td>
+                            <td>{{ primes.Client }}</td>
+                            <td>{{ primes.CompagnieAssurance }}</td>
+                            <td>{{ primes.PrimeTTC }}</td>
+                            <td>{{ primes.MontantPayer }}</td>
+                            <td>{{ primes.ResteAPayer }}</td>
+                            <td>{{ primes.Action }}</td>
+                        </th>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+    <div class="info mt-4">
+        <h4>Il n'y a pas de primes!</h4>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}
